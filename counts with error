@@ -1,0 +1,20 @@
+f = open("counts.txt","r")
+data = f.readlines()
+counts = []
+
+for line in data:
+    words = line.split()
+    counts.append(words[5])
+   
+del counts[0]
+
+new=[]
+for i in range(len(counts)):
+    new.append(float(counts[i]))
+    
+print(new)
+import numpy as np
+print(np.average(new))
+error = np.std(new)/np.sqrt(len(new))
+print(error)
+  
