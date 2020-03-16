@@ -1,0 +1,41 @@
+f = open("zeropoints_MJD05","r")
+data = f.readlines()
+mags = []
+times = []
+
+for line in data:
+    words = line.split()
+    mags.append(words[2])
+
+
+del mags[0]
+
+new=[]
+for i in range(len(mags)):
+    new.append(float(mags[i]))
+    
+print(new)
+
+for line in data:
+    words = line.split()
+    times.append(words[9])
+    
+del times[0]
+
+new2=[]
+for i in range(len(times)):
+    new2.append(float(times[i]))
+    
+import numpy as np    
+new2=np.array(new2)    
+new2 = new2-new2[0]
+   
+print(new2)
+
+error = np.std(new)/np.sqrt(len(new))
+avg = np.average(new)
+
+import matplotlib.pyplot as plt
+plt.scatter(new2,new)
+plt.xlim(0,0.001)
+plt.show()
